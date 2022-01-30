@@ -30,15 +30,21 @@ export class AppComponent implements OnInit{
     );
   }
 
-  public onOpenModal(employee: Employee, mode: string): void {
+  public onOpenModal(employee: Employee | null, mode: string): void {
+    const container = document.getElementById('main-container');
     const button = document.createElement('button');
     button.style.display = 'none';
     button.setAttribute('data-toggle', 'modal');
     if (mode === 'add') {
-      button.setAttribute('data-target', 'addEmployeeModal');
+      button.setAttribute('data-target', '#addEmployeeModal');
+    }
+    if (mode === 'edit') {
+      button.setAttribute('data-target', '#addEmployeeModal');
     }
     if (mode === 'delete') {
-      button.setAttribute('data-target', 'deleteModal');
+      button.setAttribute('data-target', '#deleteModal');
     }
+    container?.appendChild(button);
+    button.click();
   }
 }
