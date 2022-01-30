@@ -63,6 +63,50 @@
                 <form id="formUser" class="row g-3" autocomplete="off">
 
                     <div class="col-md-12">
+                        <label for="fullName" class="form-label">Name</label>
+                        <input type="text" class="form-control" name="fullName" required
+                            placeholder="Ex: Monkey D. Luffy">
+                    </div>
+                    <div class="col-md-12">
+                        <label for="userName" class="form-label">Email Adress</label>
+                        <input type="email" class="form-control" name="email" required
+                            placeholder="Ex: monkey@gmail.com">
+                    </div>
+                    <div class="col-md-12">
+                        <label for="passWord" class="form-label">Job Title</label>
+                        <input type="text" class="form-control" name="job" required placeholder="Ex: Graphics Designer">
+                    </div>
+                    <div class="col-md-12">
+                        <label for="passWord" class="form-label">Phone</label>
+                        <input type="text" class="form-control" name="phone" required placeholder="Ex: 84 000 0000">
+                    </div>
+                    <div class="col-md-12">
+                        <label for="passWord" class="form-label">Image Url</label>
+                        <input type="text" class="form-control" name="job" required placeholder="Image URL">
+                    </div>
+
+                </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Edit Employee Modal-->
+<div class="modal fade" id="editEmployeeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit Employee</h5>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="formUser" class="row g-3" autocomplete="off">
+
+                    <div class="col-md-12">
                         <label for="id" class="form-label">ID</label>
                         <input type="text" class="form-control" name="id" readonly="readonly">
                     </div>
