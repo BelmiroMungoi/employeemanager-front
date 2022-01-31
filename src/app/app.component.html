@@ -38,8 +38,9 @@
                 </ul>
                 <div class="card-body">
                     <div class="float-right btn-group btn-group-sm">
-                        <a (click)="onOpenModal(employee, 'edit')" class="btn btn-primary tooltips" data-placement="top"
-                            data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil"></i> </a>
+                        <a (click)="onOpenEditModal(employee, 'edit')" class="btn btn-primary tooltips"
+                            data-placement="top" data-toggle="tooltip" data-original-title="Edit"><i
+                                class="fa fa-pencil"></i> </a>
                         <a (click)="onOpenModal(employee, 'delete')" class="btn btn-secondary tooltips"
                             data-placement="top" data-toggle="tooltip" data-original-title="Delete"><i
                                 class="fa fa-times"></i></a>
@@ -60,35 +61,39 @@
                 <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form #addForm="ngForm" (ngSubmit)="onAddEmployee(addForm)" id="formUser" class="row g-3" autocomplete="off">
+                <form #addForm="ngForm" id="formUser" class="row g-3" autocomplete="off">
 
                     <div class="col-md-12">
                         <label for="fullName" class="form-label">Name</label>
-                        <input type="text" ngModel class="form-control" name="fullName" required
-                            placeholder="Ex: Monkey D. Luffy">
+                        <input type="text" [(ngModel)]="employee.name" [ngModelOptions]="{standalone: true}"
+                            class="form-control" name="fullName" required placeholder="Ex: Monkey D. Luffy">
                     </div>
                     <div class="col-md-12">
-                        <label for="userName" class="form-label">Email Adress</label>
-                        <input type="email" ngModel class="form-control" name="email" required
-                            placeholder="Ex: monkey@gmail.com">
+                        <label for="email" class="form-label">Email Adress</label>
+                        <input type="email" [(ngModel)]="employee.email" [ngModelOptions]="{standalone: true}"
+                            class="form-control" name="email" required placeholder="Ex: monkey@gmail.com">
                     </div>
                     <div class="col-md-12">
-                        <label for="passWord" class="form-label">Job Title</label>
-                        <input type="text" ngModel class="form-control" name="job" required placeholder="Ex: Graphics Designer">
+                        <label for="job" class="form-label">Job Title</label>
+                        <input type="text" [(ngModel)]="employee.jobTitle" [ngModelOptions]="{standalone: true}"
+                            class="form-control" name="job" required placeholder="Ex: Graphics Designer">
                     </div>
                     <div class="col-md-12">
-                        <label for="passWord" ngModel class="form-label">Phone</label>
-                        <input type="text" ngModel class="form-control" name="phone" required placeholder="Ex: 84 000 0000">
+                        <label for="phone" class="form-label">Phone</label>
+                        <input type="text" [(ngModel)]="employee.phone" [ngModelOptions]="{standalone: true}"
+                            class="form-control" name="phone" required placeholder="84 000 0000">
                     </div>
                     <div class="col-md-12">
-                        <label for="passWord" class="form-label">Image Url</label>
-                        <input type="text" ngModel class="form-control" name="job" required placeholder="Image URL">
+                        <label for="image" class="form-label">Image Url</label>
+                        <input type="text" [(ngModel)]="employee.image" [ngModelOptions]="{standalone: true}"
+                            class="form-control" name="image" required placeholder="Image URL">
                     </div>
 
                 </form>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" id="close" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-success" type="submit" [disabled]="addForm.invalid">Save Changes</button>
+                    <button type="button" class="btn btn-success" (click)="onAddEmployee()"
+                        [disabled]="addForm.invalid">Save Changes</button>
                 </div>
             </div>
         </div>
@@ -104,39 +109,46 @@
                 <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="formUser" class="row g-3" autocomplete="off">
+                <form #addForm="ngForm" id="formUser" class="row g-3" autocomplete="off">
 
                     <div class="col-md-12">
                         <label for="id" class="form-label">ID</label>
-                        <input type="text" class="form-control" name="id" readonly="readonly">
+                        <input type="text" [(ngModel)]="employee.id" [ngModelOptions]="{standalone: true}"
+                            class="form-control" name="id">
+                        <input type="hidden" [(ngModel)]="employee.employeeCode" [ngModelOptions]="{standalone: true}"
+                            class="form-control" name="code">
                     </div>
                     <div class="col-md-12">
                         <label for="fullName" class="form-label">Name</label>
-                        <input type="text" class="form-control" name="fullName" required
-                            placeholder="Ex: Monkey D. Luffy">
+                        <input type="text" [(ngModel)]="employee.name" [ngModelOptions]="{standalone: true}"
+                            class="form-control" name="fullName" required placeholder="Ex: Monkey D. Luffy">
                     </div>
                     <div class="col-md-12">
-                        <label for="userName" class="form-label">Email Adress</label>
-                        <input type="email" class="form-control" name="email" required
-                            placeholder="Ex: monkey@gmail.com">
+                        <label for="email" class="form-label">Email Adress</label>
+                        <input type="email" [(ngModel)]="employee.email" [ngModelOptions]="{standalone: true}"
+                            class="form-control" name="email" required placeholder="Ex: monkey@gmail.com">
                     </div>
                     <div class="col-md-12">
-                        <label for="passWord" class="form-label">Job Title</label>
-                        <input type="text" class="form-control" name="job" required placeholder="Ex: Graphics Designer">
+                        <label for="job" class="form-label">Job Title</label>
+                        <input type="text" [(ngModel)]="employee.jobTitle" [ngModelOptions]="{standalone: true}"
+                            class="form-control" name="job" required placeholder="Ex: Graphics Designer">
                     </div>
                     <div class="col-md-12">
-                        <label for="passWord" class="form-label">Phone</label>
-                        <input type="text" class="form-control" name="phone" required placeholder="Ex: 84 000 0000">
+                        <label for="phone" class="form-label">Phone</label>
+                        <input type="text" [(ngModel)]="employee.phone" [ngModelOptions]="{standalone: true}"
+                            class="form-control" name="phone" required placeholder="84 000 0000">
                     </div>
                     <div class="col-md-12">
-                        <label for="passWord" class="form-label">Image Url</label>
-                        <input type="text" class="form-control" name="job" required placeholder="Image URL">
+                        <label for="image" class="form-label">Image Url</label>
+                        <input type="text" [(ngModel)]="employee.image" [ngModelOptions]="{standalone: true}"
+                            class="form-control" name="image" required placeholder="Image URL">
                     </div>
 
                 </form>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-success">Save Changes</button>
+                    <button type="button" class="btn btn-success" (click)="onUpdateEmployee(employee)">Save
+                        Changes</button>
                 </div>
             </div>
         </div>
