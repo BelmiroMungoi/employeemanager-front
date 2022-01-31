@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Employee } from './employee';
 import { EmployeeService } from './employee.service';
 
@@ -8,13 +9,13 @@ import { EmployeeService } from './employee.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   title = 'EmployeeManager';
 
   public employees!: Employee[];
 
   constructor(private employeeService: EmployeeService) { }
- 
+
   ngOnInit(): void {
     this.getEmployees();
   }
@@ -24,6 +25,19 @@ export class AppComponent implements OnInit{
       (response: Employee[]) => {
         this.employees = response;
       },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+  }
+
+  public onAddEmployee(addForm: NgForm): void {
+    document.getElementById("close")?.click();
+    this.employeeService.addEmployee(addForm.value).subscribe(
+      (response: Employee) => {
+        console.log(response);
+        this.getEmployees();
+       },
       (error: HttpErrorResponse) => {
         alert(error.message);
       }
