@@ -13,6 +13,7 @@ export class AppComponent implements OnInit {
   title = 'EmployeeManager';
 
   public employees!: Employee[];
+  employee = new Employee();
 
   constructor(private employeeService: EmployeeService) { }
 
@@ -31,13 +32,26 @@ export class AppComponent implements OnInit {
     );
   }
 
-  public onAddEmployee(addForm: NgForm): void {
-    document.getElementById("close")?.click();
-    this.employeeService.addEmployee(addForm.value).subscribe(
+  public onAddEmployee(): void {
+    document.getElementById('close')?.click();
+    this.employeeService.addEmployee(this.employee).subscribe(
       (response: Employee) => {
         console.log(response);
         this.getEmployees();
-       },
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+  }
+
+  public onUpdateEmployee(update: Employee) {
+    document.getElementById('close')?.click();
+    this.employeeService.addEmployee(update).subscribe(
+      (response: Employee) => {
+        console.log(response);
+        this.getEmployees();
+      },
       (error: HttpErrorResponse) => {
         alert(error.message);
       }
@@ -52,11 +66,21 @@ export class AppComponent implements OnInit {
     if (mode === 'add') {
       button.setAttribute('data-target', '#addEmployeeModal');
     }
-    if (mode === 'edit') {
-      button.setAttribute('data-target', '#editEmployeeModal');
-    }
     if (mode === 'delete') {
       button.setAttribute('data-target', '#deleteModal');
+    }
+    container?.appendChild(button);
+    button.click();
+  }
+
+  public onOpenEditModal(employee: Employee, mode: string): void {
+    const container = document.getElementById('main-container');
+    const button = document.createElement('button');
+    button.style.display = 'none';
+    button.setAttribute('data-toggle', 'modal');
+    if (mode === 'edit') {
+      this.employee = employee;
+      button.setAttribute('data-target', '#editEmployeeModal');
     }
     container?.appendChild(button);
     button.click();
