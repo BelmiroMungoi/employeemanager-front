@@ -34,14 +34,14 @@
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item"><i class="fa fa-envelope float-right"></i>Email : <a
                             href="#">{{employee?.email}}</a></li>
-                    <li class="list-group-item"><i class="fa fa-phone float-right"></i>Phone : {{employee?.phone}}</li>
+                    <li class="list-group-item"><i class="fa fa-phone float-right"></i>Phone : {{employee.phone | mask: '00 000 0000'}}</li>
                 </ul>
                 <div class="card-body">
                     <div class="float-right btn-group btn-group-sm">
                         <a (click)="onOpenEditModal(employee, 'edit')" class="btn btn-primary tooltips"
                             data-placement="top" data-toggle="tooltip" data-original-title="Edit"><i
                                 class="fa fa-pencil"></i> </a>
-                        <a (click)="onOpenModal(employee, 'delete')" class="btn btn-secondary tooltips"
+                        <a (click)="onOpenEditModal(employee, 'delete')" class="btn btn-secondary tooltips"
                             data-placement="top" data-toggle="tooltip" data-original-title="Delete"><i
                                 class="fa fa-times"></i></a>
                     </div>
@@ -80,7 +80,7 @@
                     </div>
                     <div class="col-md-12">
                         <label for="phone" class="form-label">Phone</label>
-                        <input type="text" [(ngModel)]="employee.phone" [ngModelOptions]="{standalone: true}"
+                        <input type="text" mask="00 000 0000" [(ngModel)]="employee.phone" [ngModelOptions]="{standalone: true}"
                             class="form-control" name="phone" required placeholder="84 000 0000">
                     </div>
                     <div class="col-md-12">
@@ -135,7 +135,7 @@
                     </div>
                     <div class="col-md-12">
                         <label for="phone" class="form-label">Phone</label>
-                        <input type="text" [(ngModel)]="employee.phone" [ngModelOptions]="{standalone: true}"
+                        <input type="text" mask="00 000 0000" [(ngModel)]="employee.phone" [ngModelOptions]="{standalone: true}"
                             class="form-control" name="phone" required placeholder="84 000 0000">
                     </div>
                     <div class="col-md-12">
@@ -166,10 +166,10 @@
                 </button>
             </div>
             <div class="modal-body">
-                <p>Are you sure you want to delete this employee?</p>
+                <p>Are you sure you want to delete this employee {{employee?.name}}?</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger">Yes</button>
+                <button type="button" class="btn btn-danger" (click)="onDeleteEmploye(employee?.id)">Yes</button>
                 <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
             </div>
         </div>
