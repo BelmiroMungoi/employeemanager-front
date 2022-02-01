@@ -1,6 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import { Employee } from './employee';
 import { EmployeeService } from './employee.service';
 
@@ -37,6 +36,7 @@ export class AppComponent implements OnInit {
     this.employeeService.addEmployee(this.employee).subscribe(
       (response: Employee) => {
         console.log(response);
+        this.employee = new Employee();
         this.getEmployees();
       },
       (error: HttpErrorResponse) => {
@@ -58,6 +58,18 @@ export class AppComponent implements OnInit {
     );
   }
 
+  public onDeleteEmploye(id: any){
+    this.employeeService.deleteEmployee(id).subscribe(
+      (response: void) => {
+        console.log(response);
+        this.getEmployees();
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    )
+  }
+
   public onOpenModal(employee: Employee | null, mode: string): void {
     const container = document.getElementById('main-container');
     const button = document.createElement('button');
@@ -65,10 +77,7 @@ export class AppComponent implements OnInit {
     button.setAttribute('data-toggle', 'modal');
     if (mode === 'add') {
       button.setAttribute('data-target', '#addEmployeeModal');
-    }
-    if (mode === 'delete') {
-      button.setAttribute('data-target', '#deleteModal');
-    }
+    }    
     container?.appendChild(button);
     button.click();
   }
@@ -81,6 +90,10 @@ export class AppComponent implements OnInit {
     if (mode === 'edit') {
       this.employee = employee;
       button.setAttribute('data-target', '#editEmployeeModal');
+    }
+    if (mode === 'delete') {
+      this.employee = employee;
+      button.setAttribute('data-target', '#deleteModal');
     }
     container?.appendChild(button);
     button.click();
