@@ -114,7 +114,7 @@
                     <div class="col-md-12">
                         <label for="id" class="form-label">ID</label>
                         <input type="text" [(ngModel)]="employee.id" [ngModelOptions]="{standalone: true}"
-                            class="form-control" name="id">
+                            class="form-control" name="id" readonly>
                         <input type="hidden" [(ngModel)]="employee.employeeCode" [ngModelOptions]="{standalone: true}"
                             class="form-control" name="code">
                     </div>
@@ -146,7 +146,7 @@
 
                 </form>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" id="closeEdit" data-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-success" (click)="onUpdateEmployee(employee)">Save
                         Changes</button>
                 </div>
@@ -169,7 +169,7 @@
                 <p>Are you sure you want to delete this employee {{employee?.name}}?</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" (click)="onDeleteEmploye(employee?.id)">Yes</button>
+                <button type="button" class="btn btn-danger" id="closeDelete" (click)="onDeleteEmploye(employee?.id)">Yes</button>
                 <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
             </div>
         </div>
