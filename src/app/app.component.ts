@@ -46,7 +46,7 @@ export class AppComponent implements OnInit {
   }
 
   public onUpdateEmployee(update: Employee) {
-    document.getElementById('close')?.click();
+    document.getElementById('closeEdit')?.click();
     this.employeeService.addEmployee(update).subscribe(
       (response: Employee) => {
         console.log(response);
@@ -59,6 +59,7 @@ export class AppComponent implements OnInit {
   }
 
   public onDeleteEmploye(id: any){
+    document.getElementById('closeDelete')?.click();
     this.employeeService.deleteEmployee(id).subscribe(
       (response: void) => {
         console.log(response);
