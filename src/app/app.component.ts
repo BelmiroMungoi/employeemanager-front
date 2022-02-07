@@ -14,6 +14,7 @@ export class AppComponent implements OnInit {
 
   public employees!: Employee[];
   employee = new Employee();
+  deleteEmployee = new Employee();
 
   constructor(private employeeService: EmployeeService) { }
 
