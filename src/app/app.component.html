@@ -92,7 +92,7 @@
                 </form>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" id="close" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-success" (click)="onAddEmployee()"
+                    <button type="button" class="btn btn-success" (click)="onAddEmployee(addForm)"
                         [disabled]="addForm.invalid">Save Changes</button>
                 </div>
             </div>
@@ -109,7 +109,7 @@
                 <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form #addForm="ngForm" id="formUser" class="row g-3" autocomplete="off">
+                <form #editForm="ngForm" id="formUser" class="row g-3" autocomplete="off">
 
                     <div class="col-md-12">
                         <label for="id" class="form-label">ID</label>
@@ -147,7 +147,7 @@
                 </form>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" id="closeEdit" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-success" (click)="onUpdateEmployee(employee)">Save
+                    <button type="button" class="btn btn-success" (click)="onUpdateEmployee(editForm, employee)">Save
                         Changes</button>
                 </div>
             </div>

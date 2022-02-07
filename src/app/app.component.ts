@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Employee } from './employee';
 import { EmployeeService } from './employee.service';
 
@@ -31,29 +32,33 @@ export class AppComponent implements OnInit {
     );
   }
 
-  public onAddEmployee(): void {
+  public onAddEmployee(addForm: NgForm): void {
     document.getElementById('close')?.click();
     this.employeeService.addEmployee(this.employee).subscribe(
       (response: Employee) => {
         console.log(response);
         this.employee = new Employee();
         this.getEmployees();
+        addForm.reset();
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
+        addForm.reset();
       }
     );
   }
 
-  public onUpdateEmployee(update: Employee) {
+  public onUpdateEmployee(editForm: NgForm,update: Employee) {
     document.getElementById('closeEdit')?.click();
-    this.employeeService.addEmployee(update).subscribe(
+    this.employeeService.updateEmployee(update).subscribe(
       (response: Employee) => {
         console.log(response);
         this.getEmployees();
+        editForm.reset();
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
+        editForm.reset();
       }
     );
   }
