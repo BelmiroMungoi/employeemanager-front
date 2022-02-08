@@ -20,7 +20,7 @@
 
 <div class="container" id="main-container">
     <div class="row">
-        <div *ngFor="let employee of employees" class="col-md-6 col-xl-3">
+        <div *ngFor="let employee of employees" class="col-md-6 col-xl-4">
             <div class="card m-b-30">
                 <div class="card-body row">
                     <div class="col-6">
@@ -92,7 +92,7 @@
                 </form>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" id="close" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-success" (click)="onAddEmployee(addForm)"
+                    <button type="button" class="btn btn-success" (click)="onAddEmployee()"
                         [disabled]="addForm.invalid">Save Changes</button>
                 </div>
             </div>
@@ -147,7 +147,7 @@
                 </form>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" id="closeEdit" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-success" (click)="onUpdateEmployee(editForm, employee)">Save
+                    <button type="button" class="btn btn-success" (click)="onUpdateEmployee(employee)">Save
                         Changes</button>
                 </div>
             </div>
@@ -166,12 +166,20 @@
                 </button>
             </div>
             <div class="modal-body">
-                <p>Are you sure you want to delete employee {{employee?.name}}?</p>
+                <p>Are you sure you want to delete employee <b>{{employee?.name}}</b>?</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" id="closeDelete" (click)="onDeleteEmploye(employee?.id)">Yes</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-danger" (click)="onDeleteEmploye(employee?.id)">Yes</button>
+                <button type="button" class="btn btn-primary" id="closeDelete" data-dismiss="modal">No</button>
             </div>
         </div>
+    </div>
+</div>
+
+<!--Notification for no employees -->
+<div class="col-lg-12 col-md-12 col-xl-12">
+    <div class="alert alert-danger" role="alert">
+        <h4 class="alert-heading">NO EMPLOYEES!</h4>
+        <p>No Employees Were Found</p>
     </div>
 </div>
