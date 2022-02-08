@@ -33,33 +33,33 @@ export class AppComponent implements OnInit {
     );
   }
 
-  public onAddEmployee(addForm: NgForm): void {
+  public onAddEmployee(): void {
     document.getElementById('close')?.click();
     this.employeeService.addEmployee(this.employee).subscribe(
       (response: Employee) => {
         console.log(response);
         this.employee = new Employee();
         this.getEmployees();
-        addForm.reset();
+        this.clean()
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
-        addForm.reset();
+        this.clean();
       }
     );
   }
 
-  public onUpdateEmployee(editForm: NgForm,update: Employee) {
+  public onUpdateEmployee(update: Employee) {
     document.getElementById('closeEdit')?.click();
     this.employeeService.updateEmployee(update).subscribe(
       (response: Employee) => {
         console.log(response);
         this.getEmployees();
-        editForm.reset();
+        this.clean();
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
-        editForm.reset();
+        this.clean();
       }
     );
   }
@@ -68,7 +68,7 @@ export class AppComponent implements OnInit {
     document.getElementById('closeDelete')?.click();
     this.employeeService.deleteEmployee(id).subscribe(
       (response: void) => {
-        console.log(response);
+        alert(response);
         this.getEmployees();
       },
       (error: HttpErrorResponse) => {
@@ -83,6 +83,7 @@ export class AppComponent implements OnInit {
     button.style.display = 'none';
     button.setAttribute('data-toggle', 'modal');
     if (mode === 'add') {
+      this.clean();
       button.setAttribute('data-target', '#addEmployeeModal');
     }    
     container?.appendChild(button);
@@ -104,5 +105,9 @@ export class AppComponent implements OnInit {
     }
     container?.appendChild(button);
     button.click();
+  }
+
+  public clean(){
+    this.employee = new Employee();
   }
 }
