@@ -64,7 +64,7 @@ export class AppComponent implements OnInit {
     );
   }
 
-  public onDeleteEmploye(id: any){
+  public onDeleteEmploye(id: any) {
     document.getElementById('closeDelete')?.click();
     this.employeeService.deleteEmployee(id).subscribe(
       (response: void) => {
@@ -77,6 +77,22 @@ export class AppComponent implements OnInit {
     )
   }
 
+  public searchEmployees(key: string): void {
+    const results: Employee[] = [];
+    for (const employe of this.employees) {
+      if (employe.name.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
+        employe.email.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
+        employe.phone.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
+        employe.jobTitle.toLowerCase().indexOf(key.toLowerCase()) !== -1) {
+        results.push(employe);
+      }
+    }
+    this.employees = results;
+    if (results.length === 0 || !key) {
+      this.getEmployees();
+    }
+  }
+
   public onOpenModal(employee: Employee | null, mode: string): void {
     const container = document.getElementById('main-container');
     const button = document.createElement('button');
@@ -85,7 +101,7 @@ export class AppComponent implements OnInit {
     if (mode === 'add') {
       this.clean();
       button.setAttribute('data-target', '#addEmployeeModal');
-    }    
+    }
     container?.appendChild(button);
     button.click();
   }
@@ -107,7 +123,7 @@ export class AppComponent implements OnInit {
     button.click();
   }
 
-  public clean(){
+  public clean() {
     this.employee = new Employee();
   }
 }
