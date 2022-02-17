@@ -1,2 +1,2 @@
 # employeemanager-front
- An app to manager employee
+ An app to manager employees
